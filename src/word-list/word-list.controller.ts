@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { WordListService } from './word-list.service';
 import { CreateWordListDto } from './dto/create-word-list.dto';
-import { UpdateWordListDto } from './dto/update-word-list.dto';
 
 @Controller('word-list')
 export class WordListController {
@@ -14,21 +13,21 @@ export class WordListController {
 
   @Get()
   findAll() {
-    return this.wordListService.findAll();
+    return this.wordListService.getAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.wordListService.findOne(+id);
+    return this.wordListService.getById(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWordListDto: UpdateWordListDto) {
-    return this.wordListService.update(+id, updateWordListDto);
+  update(@Param('id') id: string, @Body() updateWordListDto: CreateWordListDto) {
+    return this.wordListService.update(id, updateWordListDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.wordListService.remove(+id);
+    return this.wordListService.remove(id);
   }
 }

@@ -8,7 +8,7 @@ import {ScheduleModule} from '@nestjs/schedule';
 import {CommandModule} from 'nestjs-command';
 import {SchedulerController} from './scheduler/scheduler.controller';
 import {SchedulerModule} from './scheduler/scheduler.module';
-import { WordListModule } from './word-list/word-list.module';
+import {WordListModule} from './word-list/word-list.module';
 
 @Module({
   imports: [
