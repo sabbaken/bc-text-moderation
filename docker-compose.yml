@@ -1,0 +1,52 @@
+version: "3"
+services:
+  rest-api:
+    image: ghcr.io/sabbaken/bc-backend/bc-backend:production
+#    build:
+#      context: .
+#      dockerfile: ./Dockerfile
+    container_name: bc-backend-prod
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    networks:
+      - bc-network
+    ports:
+      - 3000:3000
+    env_file:
+      - .env.prod
+
+  mongodb:
+    image: mongo:latest
+    container_name: bc-mongodb-prod
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - 27017:27017
+    networks:
+      - bc-network
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  caddy:
+    image: caddy/caddy:2.2.1-alpine
+    container_name: caddy-service
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+networks:
+  bc-network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
