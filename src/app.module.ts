@@ -9,6 +9,8 @@ import {CommandModule} from 'nestjs-command';
 import {SchedulerController} from './scheduler/scheduler.controller';
 import {SchedulerModule} from './scheduler/scheduler.module';
 import {WordListModule} from './word-list/word-list.module';
+import { ModeratorModule } from './moderator/moderator.module';
+import {WordListCommand} from './word-list/word-list.command';
 
 @Module({
   imports: [
@@ -22,9 +24,10 @@ import {WordListModule} from './word-list/word-list.module';
     CommandModule,
     SchedulerModule,
     WordListModule,
+    ModeratorModule,
   ],
   controllers: [AppController, SchedulerController],
-  providers: [AppService]
+  providers: [AppService, WordListCommand]
 })
 
 export class AppModule {

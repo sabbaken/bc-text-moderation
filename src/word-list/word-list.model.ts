@@ -1,17 +1,17 @@
 import {prop} from '@typegoose/typegoose';
 import {Base, TimeStamps} from '@typegoose/typegoose/lib/defaultClasses';
 
-
 export interface WordListModel extends Base {
 }
 
 export class WordListModel extends TimeStamps {
-  @prop({unique: true})
+  @prop()
   name: string;
 
   @prop()
   language: string;
 
-  @prop()
+  @prop({type: () => [String]})
   items: string[];
 }
+

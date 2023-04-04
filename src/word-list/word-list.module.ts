@@ -16,7 +16,8 @@ import {WordListModel} from './word-list.model';
     ]),
   ],
   controllers: [WordListController],
-  providers: [WordListService]
+  providers: [WordListService],
+  exports: [WordListService]
 })
 export class WordListModule {
 }
