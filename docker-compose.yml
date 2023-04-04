@@ -1,16 +1,13 @@
 version: "3"
 services:
   rest-api:
-    image: ghcr.io/sabbaken/bc-backend/bc-backend:production
-#    build:
-#      context: .
-#      dockerfile: ./Dockerfile
-    container_name: bc-backend-prod
+    image: ghcr.io/sabbaken/bc-text-moderation/bc-text-moderation:production
+    container_name: text-moderation-prod
     restart: unless-stopped
     depends_on:
       - mongodb
     networks:
-      - bc-network
+      - text-moderation-network
     ports:
       - 3000:3000
     env_file:
@@ -18,7 +15,7 @@ services:
 
   mongodb:
     image: mongo:latest
-    container_name: bc-mongodb-prod
+    container_name: text-moderation-mongodb-prod
     restart: unless-stopped
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
@@ -26,7 +23,7 @@ services:
     ports:
       - 27017:27017
     networks:
-      - bc-network
+      - text-moderation-network
     volumes:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
@@ -44,7 +41,7 @@ services:
       - caddy_config:/config
 
 networks:
-  bc-network:
+  text-moderation-network:
     driver: bridge
 
 volumes:
