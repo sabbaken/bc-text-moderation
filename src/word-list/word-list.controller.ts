@@ -12,12 +12,12 @@ export class WordListController {
   }
 
   @Get()
-  findAll() {
+  getAll() {
     return this.wordListService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  getById(@Param('id') id: string) {
     return this.wordListService.getById(id);
   }
 

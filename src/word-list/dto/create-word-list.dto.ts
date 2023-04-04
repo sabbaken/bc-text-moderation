@@ -1,6 +1,10 @@
-import {IsArray, IsString} from 'class-validator';
+import {IsArray, IsOptional, IsString} from 'class-validator';
 
 export class CreateWordListDto {
+  @IsOptional()
+  @IsString()
+  _id?: string;
+
   @IsString()
   name: string;
 

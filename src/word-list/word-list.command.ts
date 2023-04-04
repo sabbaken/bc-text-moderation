@@ -9,8 +9,8 @@ export class BoardCommand {
   }
 
   @Command({
-    command: 'seed:boards',
-    describe: 'seed db with boards',
+    command: 'seed:word-list',
+    describe: 'seed db with WordList',
   })
   async seed() {
     for (const wordList of wordListSeed) {
