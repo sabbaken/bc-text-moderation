@@ -1,21 +1,20 @@
-# BC text moderation
+# Automated text moderation
 
-This is a NestJS backend designed to perform automatic moderation on text. This system provides an efficient solution
+This is a NestJS project designed to perform automatic moderation on text. This system provides an efficient solution
 for moderating user-generated content such as comments or posts by utilizing a pre-defined list of banned words.
 
 ## Development
 
-Start mongodb-dev `docker-compose -p bc-text-moderation-dev -f ./docker-compose-dev.yml up -d`
-
-Seed db `npx nestjs-command seed:word-list`
-
-Start dev server `start:dev`
+- Create .env file (use .env.example)
+- Start mongodb-dev `docker-compose -p bc-text-moderation-dev -f ./docker-compose-dev.yml up -d`
+- Seed db `npx nestjs-command seed:word-list`
+- Start dev server `start:dev`
 
 ## Deployment
 
-Start mongodb-dev `docker-compose -p bc-text-moderation -f ./docker-compose.yml up -d`
-
-Seed db `npx nestjs-command seed:word-list`
+- Create .env file (use .env.example)
+- Start mongodb-dev `docker-compose -p bc-text-moderation -f ./docker-compose.yml up -d`
+- Seed db `npx nestjs-command seed:word-list`
 
 ## How to use
 
