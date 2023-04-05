@@ -2,8 +2,7 @@ import {CreateWordListDto} from '../word-list/dto/create-word-list.dto';
 
 export const WordListSeed: CreateWordListDto[] = [
   {
-    // _id: '642b32851f4634cebed6f45c',
-    name: 'Наркотики',
+    name: 'Drug names',
     language: 'ru',
     items: [
       'гаш',

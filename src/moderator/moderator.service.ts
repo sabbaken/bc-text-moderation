@@ -12,13 +12,10 @@ export class ModeratorService {
   }
 
   async moderateAll(dto: ModerateAllDto): Promise<unknown> {
-    const moderatedItems = [];
-    for (const item of dto.items) {
-      moderatedItems.push({
-        ...item,
-        isAcceptable: await this.moderate(item, dto.moderationOptions, dto.language)
-      });
-    }
+    const moderatedItems = await Promise.all(dto.items.map(async (item) => ({
+      ...item,
+      isAcceptable: await this.moderate(item, dto.moderationOptions, dto.language),
+    })));
     return {...dto, items: moderatedItems};
   }
 
@@ -34,14 +31,22 @@ export class ModeratorService {
 
   private async moderateByWordList(itemDto: ModerationItemDto, wordLists: DocumentType<WordListModel>[]): Promise<any> {
     for (const wordList of wordLists) {
-      for (const word of wordList.items) {
-        for (const field of Object.values(itemDto.textFields)) {
-          if (field.includes(word)) {
+      for (const field of Object.values(itemDto.textFields)) {
+        const sanitizedField = this.sanitizeText(field);
+        for (const word of wordList.items) {
+          if (sanitizedField.includes(word.toLowerCase())) {
             return false;
           }
         }
       }
     }
     return true;
+  }
+
+  private sanitizeText(str: string) {
+    return str
+      .toLowerCase()
+      .replace(/[.*+?^${}()|\[\]\\]/g, '')
+      .trim();
   }
 }

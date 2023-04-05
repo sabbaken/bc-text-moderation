@@ -4,9 +4,6 @@ import {Type} from 'class-transformer';
 export class ModerationItemDto {
   @IsObject()
   textFields: Object;
-  // text: string
-  // title: string
-  // username: string
 }
 
 export class ModerationOptionsDto {
